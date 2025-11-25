@@ -1,0 +1,582 @@
+/* =========================================
+   1. GLOBAL & VARIABLES
+   ========================================= */
+:root {
+  --zzz-red: #ff3b3b;
+  --zzz-yellow: #ccff00; /* Neon Yellow */
+  --zzz-black: #0f0f0f;
+  --zzz-panel: rgba(20, 20, 20, 0.9);
+}
+
+body {
+  background: radial-gradient(circle at center, #222, #000);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: "Chakra Petch", sans-serif;
+  color: white;
+}
+
+/* =========================================
+   2. NAVBAR
+   ========================================= */
+.zzz-navbar {
+  padding: 20px 40px;
+  width: 100%;
+  /* Agar navbar tidak menghalangi klik elemen di bawahnya */
+  pointer-events: none;
+}
+
+.nav-left {
+  position: fixed;
+  top: 30px;
+  left: 50px;
+  z-index: 100;
+  pointer-events: auto; /* Aktifkan klik kembali untuk tombol ini */
+}
+
+.nav-left a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.location-pill {
+  display: flex;
+  align-items: center;
+  background: black;
+  border-radius: 50px;
+  padding: 5px 15px;
+  border: 4px solid #333;
+  height: 50px;
+  width: 130px;
+  justify-content: center;
+  transition: 0.2s;
+}
+
+.location-pill:active {
+  background-color: #fee709;
+}
+
+.location-pill:active span {
+  color: #0e0e0e;
+}
+
+.home-icon {
+  background: black;
+  border: 4px solid #333;
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+.home-symbol {
+  color: white;
+  font-size: 16px;
+  margin: 0;
+  line-height: 0;
+}
+
+.location-text {
+  color: white;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+/* --- PERBAIKAN NAVBAR KANAN --- */
+.nav-right {
+  position: fixed;
+  top: 30px;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  background-color: #333;
+  border-radius: 50px;
+  padding: 10px 15px; /* Padding sedikit diperbesar */
+  border: 4px solid #0e0e0e;
+
+  /* Agar tinggi fleksibel mengikuti isi */
+  height: auto;
+  min-height: 60px;
+
+  z-index: 100;
+  pointer-events: auto;
+
+  /* Agar tombol turun baris dengan rapi */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.nav-arrow {
+  background: transparent;
+  border: none;
+  color: #666;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.character-strip {
+  display: flex;
+  gap: 5px;
+  /* Tambahan agar tombol menu rapi */
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 8px;
+}
+
+.char-slot {
+  color: white;
+  text-align: center;
+  width: 100px;
+  height: 40px;
+  background: #090909;
+  transform: skewX(-20deg);
+  border: 2px solid transparent;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.char-slot:active {
+  background-color: #fee709;
+}
+
+.char-slot:active a {
+  color: #090909;
+  font-weight: 800;
+}
+
+.char-slot a {
+  text-decoration: none;
+  color: white;
+  transform: skewX(20deg);
+  display: block;
+  width: 100%;
+  font-weight: 800;
+}
+
+.char-slot.active,
+.char-slot:hover {
+  border-color: var(--zzz-yellow);
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(204, 255, 0, 0.4);
+}
+
+/* =========================================
+   3. BACKGROUND TEXT
+   ========================================= */
+.textBackground {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding-top: 0px;
+  z-index: 0;
+  pointer-events: none;
+  margin-top: 150px;
+}
+
+.movingText {
+  opacity: 0.05;
+  color: white;
+  transform: rotate(-2deg);
+  font-size: 160px;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+/* =========================================
+   4. HERO & PROFILE
+   ========================================= */
+.hero-image {
+  position: absolute;
+  top: 130px;
+  left: 10%;
+  height: 80vh;
+  z-index: 10;
+  transform: scaleX(-1);
+  border-radius: 32%;
+  object-fit: cover;
+}
+
+.profile-window {
+  position: absolute;
+  right: 5%;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 520px;
+  height: auto;
+  padding: 20px;
+  background-color: #333333;
+  border-radius: 12px;
+  border: 1px solid #090909;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  color: white;
+  z-index: 20;
+}
+
+.namecard {
+  align-content: center;
+  height: 140px;
+  background: radial-gradient(circle at right, #1e1e1e, #090909);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.namecard h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.namecard p {
+  font-style: italic;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #ccc;
+}
+
+.about_me_content {
+  padding-top: 15px;
+  text-align: justify;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* =========================================
+   5. PROJECTS SECTION
+   ========================================= */
+.project-section {
+  position: relative;
+  /* Margin top besar agar turun di bawah Hero Image */
+  margin-top: 110vh;
+  padding-bottom: 100px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-title {
+  color: white;
+  font-weight: 700;
+  font-size: 36px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-bottom: 3rem;
+}
+
+.project-card {
+  background-color: #0e0e0e;
+  border-radius: 15px;
+  padding: 30px 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 4px solid #333333;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  min-height: 400px;
+  width: 100%;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 2px #333333;
+  border-color: #fee709;
+}
+
+.card-img-wrapper {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.project-icon {
+  max-height: 80px;
+  max-width: 80px;
+  object-fit: contain;
+  margin: 0 auto 15px;
+  display: block;
+}
+
+.project-card h3 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.project-card p {
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.custom-btn {
+  background-color: #333333;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  font-weight: 600;
+  width: 100%;
+  max-width: 150px;
+  transform: skewX(-15deg);
+  text-decoration: none;
+  display: inline-block;
+  color: white;
+  transition: 0.3s;
+}
+
+.custom-btn span {
+  display: block;
+  transform: skewX(15deg);
+  font-weight: 600;
+}
+
+.custom-btn:hover {
+  background-color: #fee709;
+  color: #090909;
+  font-weight: 600;
+}
+
+.custom-btn:hover span {
+  color: #090909;
+  font-weight: 800;
+}
+
+.custom-btn:active {
+  background-color: #0e0e0e;
+  color: white;
+  font-weight: 600;
+}
+
+.custom-btn:active span {
+  color: white;
+  font-weight: 800;
+}
+
+/* =========================================
+   6. SKILLS SECTION
+   ========================================= */
+.skill-pill {
+  background-color: #0e0e0e;
+  border: 4px #333333 solid;
+  border-radius: 50px;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: default;
+  transition: all 0.3s ease;
+
+  width: 180px;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-pill:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 2px #333333;
+  border-color: #fee709;
+  color: #fee709;
+}
+
+/* =========================================
+   7. CONTACT SECTION
+   ========================================= */
+.contact-section {
+  margin-top: 100px;
+  padding-bottom: 100px;
+}
+
+.contact-card {
+  background-color: #0e0e0e;
+  border: 4px solid #333333;
+  border-radius: 15px;
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.custom-input {
+  background-color: white;
+  border: 4px solid #333333;
+  color: #0e0e0e;
+  padding: 15px;
+  border-radius: 8px;
+  resize: none;
+  overflow: hidden;
+}
+
+.custom-input::placeholder {
+  color: #666;
+  font-style: italic;
+}
+
+.custom-input:focus {
+  background-color: #1e1e1e;
+  color: white;
+  border-color: #fee709;
+  box-shadow: 0 0 10px rgba(204, 255, 0, 0.3);
+  outline: none;
+}
+
+.form-btn {
+  background-color: #0e0e0e;
+  border: 4px #333333 solid;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  width: 170px;
+  transform: skewX(-15deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  color: white;
+}
+
+.form-btn span {
+  display: block;
+  transform: skewX(15deg);
+}
+
+.form-btn:hover {
+  background-color: #0e0e0e;
+  color: #fee709;
+  border-color: #fee709;
+  transform: translateY(-5px) skew(-15deg);
+  box-shadow: 0 5px 2px #333333;
+}
+
+.form-btn:active {
+  background-color: #fee709;
+  color: #090909;
+}
+
+/* =========================================
+   8. FOOTER
+   ========================================= */
+.foot {
+  width: 100%;
+  color: #888;
+  background-color: #0e0e0e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+  padding: 0;
+  border-top: 1px solid #222;
+}
+
+.foot p {
+  margin: 0;
+}
+
+/* =========================================================
+   9. MOBILE RESPONSIVE (MEDIA QUERIES)
+   ========================================================= */
+
+/* Untuk Tablet & Layar Kecil (di bawah 992px) */
+@media (max-width: 992px) {
+  .zzz-navbar {
+    pointer-events: none;
+  }
+
+  .nav-left,
+  .nav-right {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    justify-content: center;
+    margin: 10px auto;
+    width: 100%;
+
+    /* Ubah radius jadi lebih kotak saat layar sempit agar muat banyak */
+    border-radius: 50px;
+  }
+
+  .zzz-navbar {
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.8);
+    pointer-events: auto;
+  }
+
+  .character-strip {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Hero Image - Tampil Statis */
+  .hero-image {
+    position: static;
+    display: block;
+    width: 80%;
+    max-width: 400px;
+    height: auto;
+    margin: 20px auto;
+    transform: scaleX(-1);
+  }
+
+  /* Profile Window - Tampil Statis */
+  .profile-window {
+    position: static;
+    transform: none;
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    height: auto;
+  }
+
+  /* Margin Reset */
+  .project-section {
+    margin-top: 50px;
+  }
+
+  .textBackground {
+    margin-top: 50px;
+  }
+  .movingText {
+    font-size: 60px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+/* Untuk HP Kecil (di bawah 576px) */
+@media (max-width: 576px) {
+  .char-slot {
+    width: 65px;
+    font-size: 12px;
+  }
+
+  .namecard h2 {
+    font-size: 22px;
+  }
+
+  .contact-card {
+    padding: 20px;
+  }
+}
