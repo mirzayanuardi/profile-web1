@@ -569,8 +569,9 @@ body {
 /* di bawah 576px */
 @media (max-width: 576px) {
   .char-slot {
-    width: 65px;
-    font-size: 12px;
+    height: 25px;
+    width: 45px;
+    font-size: 8px;
   }
 
   .namecard h2 {
