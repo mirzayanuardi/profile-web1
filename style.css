@@ -1,9 +1,6 @@
-/* =========================================
-   1. GLOBAL & VARIABLES
-   ========================================= */
 :root {
   --zzz-red: #ff3b3b;
-  --zzz-yellow: #ccff00; /* Neon Yellow */
+  --zzz-yellow: #fee709;
   --zzz-black: #0f0f0f;
   --zzz-panel: rgba(20, 20, 20, 0.9);
 }
@@ -17,13 +14,11 @@ body {
   color: white;
 }
 
-/* =========================================
-   2. NAVBAR
-   ========================================= */
+/* NAVBAR */
 .zzz-navbar {
   padding: 20px 40px;
   width: 100%;
-  /* Agar navbar tidak menghalangi klik elemen di bawahnya */
+
   pointer-events: none;
 }
 
@@ -32,7 +27,7 @@ body {
   top: 30px;
   left: 50px;
   z-index: 100;
-  pointer-events: auto; /* Aktifkan klik kembali untuk tombol ini */
+  pointer-events: auto;
 }
 
 .nav-left a {
@@ -88,7 +83,7 @@ body {
   font-size: 18px;
 }
 
-/* --- PERBAIKAN NAVBAR KANAN --- */
+/* --- NAVBAR KANAN --- */
 .nav-right {
   position: fixed;
   top: 30px;
@@ -97,17 +92,15 @@ body {
   align-items: center;
   background-color: #333;
   border-radius: 50px;
-  padding: 10px 15px; /* Padding sedikit diperbesar */
+  padding: 10px 15px;
   border: 4px solid #0e0e0e;
 
-  /* Agar tinggi fleksibel mengikuti isi */
   height: auto;
   min-height: 60px;
 
   z-index: 100;
   pointer-events: auto;
 
-  /* Agar tombol turun baris dengan rapi */
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
@@ -125,7 +118,7 @@ body {
 .character-strip {
   display: flex;
   gap: 5px;
-  /* Tambahan agar tombol menu rapi */
+
   flex-wrap: wrap;
   justify-content: center;
   row-gap: 8px;
@@ -174,31 +167,53 @@ body {
   box-shadow: 0 0 10px rgba(204, 255, 0, 0.4);
 }
 
-/* =========================================
-   3. BACKGROUND TEXT
-   ========================================= */
+/* BACKGROUND TEXT */
 .textBackground {
-  position: absolute;
+  position: fixed;
   top: 0;
+  left: 0;
+
   width: 100%;
-  padding-top: 0px;
-  z-index: 0;
+  height: 100vh;
+
+  z-index: -1;
+
+  margin-top: 0;
+  padding: 0;
+
   pointer-events: none;
-  margin-top: 150px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  opacity: 0.2;
+  background: radial-gradient(circle at center, #222, #000);
+
+  opacity: 0.2;
+  transition: opacity 0.8s ease;
+  pointer-events: none;
+}
+
+.bg-hidden {
+  opacity: 0 !important;
 }
 
 .movingText {
-  opacity: 0.05;
-  color: white;
-  transform: rotate(-2deg);
-  font-size: 160px;
-  text-transform: uppercase;
+  color: #333;
+  font-size: 8vw;
   font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0;
+
+  transform: rotate(-5deg) scale(1.2);
+  width: 120%;
+  align-self: center;
 }
 
-/* =========================================
-   4. HERO & PROFILE
-   ========================================= */
+/* HERO IMAGE & PROFILE */
 .hero-image {
   position: absolute;
   top: 130px;
@@ -208,12 +223,13 @@ body {
   transform: scaleX(-1);
   border-radius: 32%;
   object-fit: cover;
+  transform: scaleX(-1);
 }
 
 .profile-window {
   position: absolute;
   right: 5%;
-  top: 55%;
+  top: 35%;
   transform: translateY(-50%);
   width: 520px;
   height: auto;
@@ -258,12 +274,9 @@ body {
   line-height: 1.6;
 }
 
-/* =========================================
-   5. PROJECTS SECTION
-   ========================================= */
+/* PROJECTS SECTION */
 .project-section {
   position: relative;
-  /* Margin top besar agar turun di bawah Hero Image */
   margin-top: 110vh;
   padding-bottom: 100px;
   z-index: 20;
@@ -374,9 +387,7 @@ body {
   font-weight: 800;
 }
 
-/* =========================================
-   6. SKILLS SECTION
-   ========================================= */
+/* SKILLS SECTION */
 .skill-pill {
   background-color: #0e0e0e;
   border: 4px #333333 solid;
@@ -402,9 +413,7 @@ body {
   color: #fee709;
 }
 
-/* =========================================
-   7. CONTACT SECTION
-   ========================================= */
+/* CONTACT SECTION */
 .contact-section {
   margin-top: 100px;
   padding-bottom: 100px;
@@ -473,9 +482,8 @@ body {
   color: #090909;
 }
 
-/* =========================================
-   8. FOOTER
-   ========================================= */
+/* FOOTER */
+
 .foot {
   width: 100%;
   color: #888;
@@ -492,11 +500,8 @@ body {
   margin: 0;
 }
 
-/* =========================================================
-   9. MOBILE RESPONSIVE (MEDIA QUERIES)
-   ========================================================= */
-
-/* Untuk Tablet & Layar Kecil (di bawah 992px) */
+/* MOBILE RESPONSIVE */
+/* di bawah 992px */
 @media (max-width: 992px) {
   .zzz-navbar {
     pointer-events: none;
@@ -511,8 +516,6 @@ body {
     justify-content: center;
     margin: 10px auto;
     width: 100%;
-
-    /* Ubah radius jadi lebih kotak saat layar sempit agar muat banyak */
     border-radius: 50px;
   }
 
@@ -527,7 +530,6 @@ body {
     justify-content: center;
   }
 
-  /* Hero Image - Tampil Statis */
   .hero-image {
     position: static;
     display: block;
@@ -538,7 +540,6 @@ body {
     transform: scaleX(-1);
   }
 
-  /* Profile Window - Tampil Statis */
   .profile-window {
     position: static;
     transform: none;
@@ -548,7 +549,6 @@ body {
     height: auto;
   }
 
-  /* Margin Reset */
   .project-section {
     margin-top: 50px;
   }
@@ -565,7 +565,7 @@ body {
   }
 }
 
-/* Untuk HP Kecil (di bawah 576px) */
+/* di bawah 576px */
 @media (max-width: 576px) {
   .char-slot {
     width: 65px;
@@ -579,4 +579,48 @@ body {
   .contact-card {
     padding: 20px;
   }
+}
+
+/* ANIMASI */
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.navbar-scrolled {
+  background-color: rgba(15, 15, 15, 0.95) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.hero-delayed {
+  transition-delay: 0.6s;
+  transform: translateX(-50px) scaleX(-1) !important;
+}
+
+.hero-delayed {
+  transform: translateX(-50px);
+}
+
+.hero-delayed.active {
+  transform: translateX(0) scaleX(-1) !important;
+  opacity: 1;
+}
+
+.char-slot.active-link {
+  border-color: var(--zzz-yellow);
+  box-shadow: 0 0 10px rgba(204, 255, 0, 0.4);
+  opacity: 1 !important;
+}
+
+.char-slot.active-link a {
+  color: var(--zzz-yellow);
 }
