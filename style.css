@@ -222,7 +222,7 @@ body {
   height: 80vh;
   z-index: 10;
   transform: scaleX(-1);
-  border-radius: 32%;
+  border-radius: 50px;
   object-fit: cover;
   transform: scaleX(-1);
 }
